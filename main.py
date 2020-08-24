@@ -6,7 +6,6 @@ from functions import *
 S1 = Sudoku(Board)
 S1.printBoard()
 
-while S1.isSolved() == False:
-    fillPretendents(S1)
+S1.solve()
 
 S1.printBoard()

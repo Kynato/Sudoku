@@ -99,8 +99,6 @@ class Sudoku:
         self.quads = returnQuads(matrix)
         self.solved = False
 
-        #self.pretendents = 
-
     # In case we need to assign new (maybe slightly transformed) matrix
     def redefine(self, matrix):
         self.rows = matrix
@@ -113,7 +111,15 @@ class Sudoku:
                 if cell == 0:
                     return False
 
+        self.solved = True
         return True
+
+    def solve(self):
+        try:
+            while self.isSolved() == False:
+                fillPretendents(self)
+        except:
+            print('Error ocurred during sudoku solving')
 
     # Prints the board in ASCII fashion
     def printBoard(self):
@@ -134,19 +140,19 @@ class Sudoku:
         self.redefine(hero)
 
     # Checks whether the digit checks the sudoku rules
-    def isDigitValid(self, row, col, digit):
-        debug = False
+    def isDigitValid(self, row:int, col:int, digit:int):
+        #debug = False
         if digit in self.rows[row]:                                         # is present in row
-            if debug == True: print('Not valid due to ROW overpopulation')
+            #if debug == True: print('Not valid due to ROW overpopulation')
             return False
         if digit in self.cols[col]:                                         # is present in column
-            if debug == True: print('Not valid due to COLUMN overpopulation')
+            #if debug == True: print('Not valid due to COLUMN overpopulation')
             return False
-        if digit in self.quads[returnQuadIndex(row, col)]:      # is present in quad
-            if debug == True: print('Not valid due to QUAD overpopulation')
+        if digit in self.quads[returnQuadIndex(row, col)]:                  # is present in quad
+            #if debug == True: print('Not valid due to QUAD overpopulation')
             return False
 
-        if debug == True: print('row: {0} col: {1}    valid: {2}'.format(row, col, True))
+        #if debug == True: print('row: {0} col: {1}    valid: {2}'.format(row, col, True))
         # If not returned earlier then valid
         return True
 

@@ -108,16 +108,16 @@ class Sudoku:
     def isDigitValid(self, row, col, digit):
         
         if digit in self.rows[row]:                                         # is present in row
-            print('Not valid due to ROW overpopulation')
+            #print('Not valid due to ROW overpopulation')
             return False
         if digit in self.cols[col]:                                         # is present in column
-            print('Not valid due to COLUMN overpopulation')
+            #print('Not valid due to COLUMN overpopulation')
             return False
         if digit in self.quads[math.floor(col/3) + math.floor(row/3)]:      # is present in quad
-            print('Not valid due to QUAD overpopulation')
+            #print('Not valid due to QUAD overpopulation')
             return False
 
-        print('row: {0} col: {1}    valid: {2}'.format(row, col, True))
+        #print('row: {0} col: {1}    valid: {2}'.format(row, col, True))
         # If not returned earlier then valid
         return True
 
@@ -126,9 +126,10 @@ def fillPretendents(sudoku: Sudoku):
     for row in range(9):
         for col in range(9):
             newInsert = []
+            # insert here if statement that check if there was blank space
             for digit in range(1,10):
                 if sudoku.isDigitValid(row, col, digit):
                     newInsert.append(digit)
-            output.append[newInsert]
+            output.append(newInsert)
 
     print(output)

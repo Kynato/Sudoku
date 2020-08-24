@@ -1,4 +1,5 @@
 import math
+import copy
 
 # Declaration of example sudoku board
 Board = [   [2, 0, 0, 0, 3, 1, 0, 0, 6],
@@ -27,9 +28,9 @@ BoardSolved = [ [2, 9, 4, 7, 3, 1, 8, 5, 6],
                 [4, 7, 6, 9, 2, 5, 3, 8, 1]]
 
 # Prints a Board in a ASCII fashion
-def printBoard():
+def printBoard(mtx = Board):
     asciiBoard = ''
-    for line in Board:
+    for line in mtx:
         asciiBoard += '[ '
         for digit in line:
             asciiBoard += str(digit) + ' '
@@ -37,6 +38,7 @@ def printBoard():
         asciiBoard += ']\n'
 
     print(asciiBoard)
+    
 
 # Returns vertical columns of numbers extracted from matrix
 def returnCols(matrix):
@@ -49,7 +51,7 @@ def returnCols(matrix):
 
         output.append(newCol)
 
-    print('Cols:\n' + str(output))
+    #print('Cols:\n' + str(output))
 
     return output
 
@@ -85,7 +87,7 @@ def returnQuads(matrix):
                 if row < 9 and row >=6:
                     output[8].append(matrix[col][row])
 
-    print('Quads:\n' + str(output))
+    #print('Quads:\n' + str(output))
     return output 
              
 
@@ -104,6 +106,24 @@ class Sudoku:
         self.cols = returnCols(matrix)
         self.quads = returnQuads(matrix)
 
+    # Prints the board in ASCII fashion
+    def printBoard(self):
+        asciiBoard = ''
+        for line in self.rows:
+            asciiBoard += '[ '
+            for digit in line:
+                asciiBoard += str(digit) + ' '
+
+            asciiBoard += ']\n'
+
+        print(asciiBoard)
+
+    # Changes value in given row and col
+    def changeValue(self, row:int, col:int, newValue:int):
+        hero = copy.deepcopy(self.rows)
+        hero[row][col] = newValue
+        self.redefine(hero)
+
     # Checks whether the digit checks the sudoku rules
     def isDigitValid(self, row, col, digit):
         
@@ -121,15 +141,22 @@ class Sudoku:
         # If not returned earlier then valid
         return True
 
-def fillPretendents(sudoku: Sudoku):
+# Creates a list of lists containing pretendents for a valid digit for a chosen Sudoku object
+def fillPretendents(original: Sudoku):
+    
     output = []
     for row in range(9):
         for col in range(9):
             newInsert = []
             # insert here if statement that check if there was blank space
-            for digit in range(1,10):
-                if sudoku.isDigitValid(row, col, digit):
-                    newInsert.append(digit)
+            if original.rows[row][col] == 0:
+                for digit in range(1,10):
+                    if original.isDigitValid(row, col, digit):
+                        newInsert.append(digit)
+
+            if len(newInsert) == 1:
+                original.changeValue(row, col, newInsert[0])
+
             output.append(newInsert)
 
     print(output)

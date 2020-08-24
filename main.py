@@ -6,3 +6,4 @@ printBoard()
 
 S1 = Sudoku(Board)
 S1.isDigitValid(0, 2, 4)
+fillPretendents(S1)

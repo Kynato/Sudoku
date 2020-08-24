@@ -87,29 +87,48 @@ def returnQuads(matrix):
 
     print('Quads:\n' + str(output))
     return output 
+             
 
-                
-
-
-
+# Class that transforms a board into something that is easier to operate on. Also more intuitive and clearer to read
 class Sudoku:
     def __init__(self, matrix):
         self.rows = matrix
         self.cols = returnCols(matrix)
         self.quads = returnQuads(matrix)
 
+        #self.pretendents = 
+
+    # In case we need to assign new (maybe slightly transformed) matrix
+    def redefine(self, matrix):
+        self.rows = matrix
+        self.cols = returnCols(matrix)
+        self.quads = returnQuads(matrix)
+
+    # Checks whether the digit checks the sudoku rules
     def isDigitValid(self, row, col, digit):
         
-        if digit in self.rows[row]:          # is present in row
+        if digit in self.rows[row]:                                         # is present in row
             print('Not valid due to ROW overpopulation')
             return False
-        if digit in self.cols[col]:          # is present in column
+        if digit in self.cols[col]:                                         # is present in column
             print('Not valid due to COLUMN overpopulation')
             return False
-        if digit in self.quads[math.floor(col/3) + math.floor(row/3)]:   # is present in quad
+        if digit in self.quads[math.floor(col/3) + math.floor(row/3)]:      # is present in quad
             print('Not valid due to QUAD overpopulation')
             return False
 
         print('row: {0} col: {1}    valid: {2}'.format(row, col, True))
         # If not returned earlier then valid
         return True
+
+def fillPretendents(sudoku: Sudoku):
+    output = []
+    for row in range(9):
+        for col in range(9):
+            newInsert = []
+            for digit in range(1,10):
+                if sudoku.isDigitValid(row, col, digit):
+                    newInsert.append(digit)
+            output.append[newInsert]
+
+    print(output)

@@ -97,6 +97,7 @@ class Sudoku:
         self.rows = matrix
         self.cols = returnCols(matrix)
         self.quads = returnQuads(matrix)
+        self.solved = False
 
         #self.pretendents = 
 
@@ -105,6 +106,14 @@ class Sudoku:
         self.rows = matrix
         self.cols = returnCols(matrix)
         self.quads = returnQuads(matrix)
+
+    def isSolved(self):
+        for row in self.rows:
+            for cell in row:
+                if cell == 0:
+                    return False
+
+        return True
 
     # Prints the board in ASCII fashion
     def printBoard(self):
@@ -126,18 +135,18 @@ class Sudoku:
 
     # Checks whether the digit checks the sudoku rules
     def isDigitValid(self, row, col, digit):
-        
+        debug = False
         if digit in self.rows[row]:                                         # is present in row
-            #print('Not valid due to ROW overpopulation')
+            if debug == True: print('Not valid due to ROW overpopulation')
             return False
         if digit in self.cols[col]:                                         # is present in column
-            #print('Not valid due to COLUMN overpopulation')
+            if debug == True: print('Not valid due to COLUMN overpopulation')
             return False
-        if digit in self.quads[math.floor(col/3) + math.floor(row/3)]:      # is present in quad
-            #print('Not valid due to QUAD overpopulation')
+        if digit in self.quads[returnQuadIndex(row, col)]:      # is present in quad
+            if debug == True: print('Not valid due to QUAD overpopulation')
             return False
 
-        #print('row: {0} col: {1}    valid: {2}'.format(row, col, True))
+        if debug == True: print('row: {0} col: {1}    valid: {2}'.format(row, col, True))
         # If not returned earlier then valid
         return True
 
@@ -159,4 +168,29 @@ def fillPretendents(original: Sudoku):
 
             output.append(newInsert)
 
-    print(output)
+    #print(output)
+
+def returnQuadIndex(row:int, col:int):
+    if row < 3:
+        if col < 3:
+            return 0
+        if col < 6 and col >= 3:
+            return 1
+        if col < 9 and col >= 6:
+            return 2
+
+    if row < 6 and row >= 3:
+        if col < 3:
+            return 3
+        if col < 6 and col >= 3:
+            return 4
+        if col < 9 and col >= 6:
+            return 5
+
+    if row < 9 and row >= 6:
+        if col < 3:
+            return 6
+        if col < 6 and col >= 3:
+            return 7
+        if col < 9 and col >= 6:
+            return 8

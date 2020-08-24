@@ -1,18 +1,7 @@
+# IMPORTS
 import math
 import copy
 
-# Declaration of example sudoku board
-Board = [   [2, 0, 0, 0, 3, 1, 0, 0, 6],
-            [5, 0, 7, 4, 0, 8, 2, 3, 9],
-            [0, 6, 0, 0, 0, 0, 4, 0, 7],
-
-            [3, 4, 0, 2, 5, 0, 0, 0, 0],
-            [0, 8, 1, 0, 0, 0, 6, 2, 5],
-            [6, 5, 0, 0, 0, 7, 0, 4, 0],
-
-            [9, 2, 0, 1, 7, 3, 0, 6, 4],
-            [1, 0, 5, 6, 8, 0, 7, 0, 2],
-            [4, 7, 0, 0, 2, 5, 3, 0, 0]]
 
 # BoardSolved can be used to check if the program is working properly
 BoardSolved = [ [2, 9, 4, 7, 3, 1, 8, 5, 6],
@@ -26,19 +15,6 @@ BoardSolved = [ [2, 9, 4, 7, 3, 1, 8, 5, 6],
                 [9, 2, 8, 1, 7, 3, 5, 6, 4],
                 [1, 3, 5, 6, 8, 4, 7, 9, 2],
                 [4, 7, 6, 9, 2, 5, 3, 8, 1]]
-
-# Prints a Board in a ASCII fashion
-def printBoard(mtx = Board):
-    asciiBoard = ''
-    for line in mtx:
-        asciiBoard += '[ '
-        for digit in line:
-            asciiBoard += str(digit) + ' '
-
-        asciiBoard += ']\n'
-
-    print(asciiBoard)
-    
 
 # Returns vertical columns of numbers extracted from matrix
 def returnCols(matrix):

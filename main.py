@@ -1,5 +1,6 @@
 # IMPORTS
-from functions import *
+from functions import Sudoku
+import pygame
 
 # Declaration of sudoku board
 Board = [   [2, 0, 0,   0, 3, 1,    0, 0, 6],

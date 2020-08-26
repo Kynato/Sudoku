@@ -1,7 +1,12 @@
 # IMPORTS
 from functions import Sudoku
-from gui_loop import *
+from gui_fx import *
 
+WINDOW_WIDTH = WINDOW_HEIGHT = 600
+
+# gui will be our graphics manager
+gui = GUI(WINDOW_WIDTH, WINDOW_HEIGHT)
+gui.generateBackground()
 
 # Declaration of sudoku board
 Board = [   [2, 0, 0,   0, 3, 1,    0, 0, 6],
@@ -17,11 +22,19 @@ Board = [   [2, 0, 0,   0, 3, 1,    0, 0, 6],
             [4, 7, 0,   0, 2, 5,    3, 0, 0]]
 
 # TESTS
+#print(pygame.font.get_fonts())
 
 # Transform a matrice into sudoku class
 S1 = Sudoku(Board)
 S1.printBoard()
+gui.drawDigits(S1.rows)
 
 S1.solve()
 
 S1.printBoard()
+
+while gui.state:
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                        gui.state = False
+        pygame.display.flip()

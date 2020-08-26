@@ -11,6 +11,8 @@ class GUI:
         self.backgroundColor = pygame.Color(25, 25, 25)
         # Initiate the pygame engine
         pygame.init()
+        pygame.font.init()
+        self.font = pygame.font.SysFont("segoeui", 72)
 
         # Set the size of game window
         self.screen = pygame.display.set_mode((w, h))
@@ -25,9 +27,6 @@ class GUI:
         fatOffset = -(fatlineThickness/2)
         slimColor = (100,100,100)
         fatColor = (200,200,200)
-        # vBar - Vertical bar
-        # hBar - Horizontal bar
-        vBar = pygame.Rect(0, 0, 3, self.width)
         
         # Slim lines
         for i in range(10):
@@ -43,3 +42,17 @@ class GUI:
             # Vertical lines
             pygame.draw.rect(self.screen, fatColor, pygame.Rect(0, fatOffset+ i * (boxSpacing*3), self.width, fatlineThickness))
 
+    def drawDigits(self, mtx):
+        spacing = self.width/9
+
+        for row in range(9):
+            for col in range(9):
+                text = self.font.render(str(mtx[row][col]), True, (120, 20, 150))
+                self.screen.blit(text,
+                (spacing * col, 
+                spacing * row))
+        
+
+        
+
+    

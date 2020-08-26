@@ -48,10 +48,11 @@ class GUI:
 
         for row in range(9):
             for col in range(9):
-                text = self.font.render(str(mtx[row][col]), True, (120, 20, 150))
-                self.screen.blit(text,
-                (spacing * col + horizontalOffset - (text.get_width()/2), 
-                spacing * row))
+                if mtx[row][col] != 0:
+                    text = self.font.render(str(mtx[row][col]), True, (120, 20, 150))
+                    self.screen.blit(text,
+                    (spacing * col + horizontalOffset - (text.get_width()/2), 
+                    spacing * row))
         
 
         

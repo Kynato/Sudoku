@@ -12,7 +12,7 @@ class GUI:
         # Initiate the pygame engine
         pygame.init()
         pygame.font.init()
-        self.font = pygame.font.SysFont("segoeui", 72)
+        self.font = pygame.font.SysFont("segoeui", 46)
 
         # Set the size of game window
         self.screen = pygame.display.set_mode((w, h))
@@ -44,12 +44,13 @@ class GUI:
 
     def drawDigits(self, mtx):
         spacing = self.width/9
+        horizontalOffset = spacing/2
 
         for row in range(9):
             for col in range(9):
                 text = self.font.render(str(mtx[row][col]), True, (120, 20, 150))
                 self.screen.blit(text,
-                (spacing * col, 
+                (spacing * col + horizontalOffset - (text.get_width()/2), 
                 spacing * row))
         
 

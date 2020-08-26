@@ -42,17 +42,24 @@ class GUI:
             # Vertical lines
             pygame.draw.rect(self.screen, fatColor, pygame.Rect(0, fatOffset+ i * (boxSpacing*3), self.width, fatlineThickness))
 
-    def drawDigits(self, mtx):
+    def drawDigit(self, row:int, col:int, value:int):
         spacing = self.width/9
         horizontalOffset = spacing/2
+        text = self.font.render(str(value), True, (120, 20, 150))
+        self.screen.blit(text,
+        (spacing * col + horizontalOffset - (text.get_width()/2), 
+        spacing * row))
 
+    def drawDigits(self, mtx):
         for row in range(9):
             for col in range(9):
                 if mtx[row][col] != 0:
-                    text = self.font.render(str(mtx[row][col]), True, (120, 20, 150))
-                    self.screen.blit(text,
-                    (spacing * col + horizontalOffset - (text.get_width()/2), 
-                    spacing * row))
+                    self.drawDigit(row, col, mtx[row][col])
+                    
+
+    def render(self, mtx):
+        self.generateBackground()
+        self.drawDigits(mtx)
         
 
         

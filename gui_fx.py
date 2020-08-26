@@ -26,7 +26,7 @@ class GUI:
         offset = -(lineThickness/2)
         fatOffset = -(fatlineThickness/2)
         slimColor = (100,100,100)
-        fatColor = (200,200,200)
+        fatColor = (150,150,150)
         
         # Slim lines
         for i in range(10):
@@ -62,6 +62,25 @@ class GUI:
         self.drawDigits(mtx)
         
 
-        
+class Button:
+    def __init__(self, rect, command):
+        self.rect = pg.Rect(rect)
+        self.image = pg.Surface(self.rect.size).convert()
+        self.image.fill((255,0,0))
+        self.function = command
+ 
+    def get_event(self, event):
+        if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
+            self.on_click(event)
+ 
+    def on_click(self, event):
+        if self.rect.collidepoint(event.pos):
+            self.function()
+ 
+    def draw(self, surf):
+        surf.blit(self.image, self.rect)
+         
+def button_was_pressed():
+    print('button_was_pressed')
 
     

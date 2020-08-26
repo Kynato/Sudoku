@@ -31,12 +31,15 @@ S1 = Sudoku(Board)
 S1.printBoard()
 gui.render(S1.rows)
 
+
+
 #S1.solve()
+'''
 while S1.isSolved() == False:
     fillPretendents(S1)
     gui.render(S1.rows)
     pygame.display.flip()
-    pygame.time.wait(1000)
+    pygame.time.wait(1000)'''
 
 
 S1.printBoard()

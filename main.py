@@ -1,8 +1,10 @@
 # IMPORTS
-from functions import Sudoku
+from functions import Sudoku, fillPretendents
 from gui_fx import *
 
-WINDOW_WIDTH = WINDOW_HEIGHT = 600
+WINDOW_WIDTH = 600
+WINDOW_HEIGHT = 700
+clock = pygame.time.Clock()
 
 # gui will be our graphics manager
 gui = GUI(WINDOW_WIDTH, WINDOW_HEIGHT)
@@ -27,12 +29,16 @@ Board = [   [2, 0, 0,   0, 3, 1,    0, 0, 6],
 # Transform a matrice into sudoku class
 S1 = Sudoku(Board)
 S1.printBoard()
-#gui.drawDigits(S1.rows)
 gui.render(S1.rows)
 
-S1.solve()
+#S1.solve()
+while S1.isSolved() == False:
+    fillPretendents(S1)
+    gui.render(S1.rows)
+    pygame.display.flip()
+    pygame.time.wait(1000)
 
-gui.render(S1.rows)
+
 S1.printBoard()
 
 while gui.state:

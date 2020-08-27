@@ -82,6 +82,13 @@ class GUI:
         solveTextY = self.width + (bttHeight/2) - (text.get_height()/2)
         self.screen.blit(text, (solveTextX, solveTextY))
 
+    def whichButton(self, mousePos):
+        if 0 <= mousePos[0] <= self.width/2 and self.width <= mousePos[1] <= self.height:
+            return 0 # SOLVE
+        elif self.width/2 <= mousePos[0] <= self.width and self.width <= mousePos[1] <= self.height:
+            return 1 # EXIT
+
+
         
 
     

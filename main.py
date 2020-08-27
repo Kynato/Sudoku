@@ -50,4 +50,14 @@ while gui.state:
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                         gui.state = False
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                        # 1 is the left mouse button, 2 is middle, 3 is right.
+                        if event.button == 1:
+                                # `event.pos` is the mouse position.
+                                if gui.whichButton(event.pos) == 0:
+                                        S1.solve()
+                                        gui.render(S1.rows)
+                                        pygame.display.flip()
+                                elif gui.whichButton(event.pos) == 1:
+                                        gui.state = False
         pygame.display.flip()

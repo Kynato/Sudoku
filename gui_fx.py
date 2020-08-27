@@ -1,22 +1,23 @@
 import pygame
 from pygame.locals import *
 
-#pygame.rect (x,y,w,h)
 
 class GUI:
     def __init__(self, w:int, h:int):
+        # Initiate the pygame engine
+        pygame.init()
+        pygame.font.init()
+        pygame.display.set_caption('SUDOKU - by Alan Hudela')
+
         self.width = w
         self.height = h
         self.state = True
         self.backgroundColor = pygame.Color(25, 25, 25)
-        # Initiate the pygame engine
-        pygame.init()
-        pygame.font.init()
         self.font = pygame.font.SysFont("segoeui", 46)
 
         # Set the size of game window
         self.screen = pygame.display.set_mode((w, h))
-
+        # Background color
         self.screen.fill(self.backgroundColor)
 
     def generateBackground(self):
@@ -26,7 +27,7 @@ class GUI:
         offset = -(lineThickness/2)
         fatOffset = -(fatlineThickness/2)
         slimColor = (100,100,100)
-        fatColor = (150,150,150)
+        fatColor = (200,200,200)
         
         # Slim lines
         for i in range(10):
@@ -56,31 +57,31 @@ class GUI:
                 if mtx[row][col] != 0:
                     self.drawDigit(row, col, mtx[row][col])
                     
-
     def render(self, mtx):
         self.generateBackground()
         self.drawDigits(mtx)
-        
 
-class Button:
-    def __init__(self, rect, command):
-        self.rect = pg.Rect(rect)
-        self.image = pg.Surface(self.rect.size).convert()
-        self.image.fill((255,0,0))
-        self.function = command
- 
-    def get_event(self, event):
-        if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
-            self.on_click(event)
- 
-    def on_click(self, event):
-        if self.rect.collidepoint(event.pos):
-            self.function()
- 
-    def draw(self, surf):
-        surf.blit(self.image, self.rect)
-         
-def button_was_pressed():
-    print('button_was_pressed')
+    def drawButtons(self):
+        bttHeight = self.height - self.width
+        bttWidth = self.width/2
+        bttCol = (50, 10, 80)
+
+        txtCol = (100, 100, 100)
+
+        # Solve button
+        pygame.draw.rect(self.screen, bttCol, pygame.Rect(0, self.width, bttWidth, bttHeight))
+        text = self.font.render("SOLVE", True, txtCol)
+        solveTextX = bttWidth/2 - (text.get_width()/2)
+        solveTextY = self.width + (bttHeight/2) - (text.get_height()/2)
+        self.screen.blit(text, (solveTextX, solveTextY))
+
+        # Exit button
+        pygame.draw.rect(self.screen, bttCol, pygame.Rect(bttWidth, self.width, bttWidth, bttHeight))
+        text = self.font.render("EXIT", True, txtCol)
+        solveTextX = bttWidth/2 - (text.get_width()/2) + bttWidth
+        solveTextY = self.width + (bttHeight/2) - (text.get_height()/2)
+        self.screen.blit(text, (solveTextX, solveTextY))
+
+        
 
     

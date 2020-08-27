@@ -30,6 +30,8 @@ Board = [   [2, 0, 0,   0, 3, 1,    0, 0, 6],
 S1 = Sudoku(Board)
 S1.printBoard()
 gui.render(S1.rows)
+gui.drawButtons()
+
 
 
 

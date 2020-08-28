@@ -95,6 +95,20 @@ class Sudoku:
                 fillPretendents(self)
         except:
             print('Error ocurred during sudoku solving')
+        
+    def backtrackSolve(self):
+        
+        for row in range(9):
+            for col in range(9):
+                if self.rows[row][col] == 0:
+                    for digit in range(1,10):
+                        if self.isDigitValid(row, col, digit):
+                            self.changeValue(row, col, digit)
+                            print("nowy bctrack")
+                            self.printBoard()
+                            self.backtrackSolve()
+                            self.changeValue(row, col, 0)
+                    return
 
     # Prints the board in ASCII fashion
     def printBoard(self):
@@ -138,7 +152,6 @@ def fillPretendents(original: Sudoku):
     for row in range(9):
         for col in range(9):
             newInsert = []
-            # insert here if statement that check if there was blank space
             if original.rows[row][col] == 0:
                 for digit in range(1,10):
                     if original.isDigitValid(row, col, digit):

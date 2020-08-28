@@ -55,7 +55,8 @@ while gui.state:
                         if event.button == 1:
                                 # `event.pos` is the mouse position.
                                 if gui.whichButton(event.pos) == 0:
-                                        S1.solve()
+                                        #S1.solve()
+                                        S1.backtrackSolve()
                                         gui.render(S1.rows)
                                         pygame.display.flip()
                                 elif gui.whichButton(event.pos) == 1:

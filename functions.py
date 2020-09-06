@@ -81,14 +81,16 @@ class Sudoku:
         self.quads = returnQuads(matrix)
 
     def isSolved(self):
+        if self.solved:
+            return True
+
         for row in self.rows:
             for cell in row:
                 if cell == 0:
                     return False
 
         self.solved = True
-        for i in range(15):
-            print('SOLVED')
+        print('SOLVED')
         return True
 
     def solve(self):

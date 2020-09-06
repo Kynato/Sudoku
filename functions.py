@@ -87,6 +87,8 @@ class Sudoku:
                     return False
 
         self.solved = True
+        for i in range(15):
+            print('SOLVED')
         return True
 
     def solve(self):
@@ -97,6 +99,9 @@ class Sudoku:
             print('Error ocurred during sudoku solving')
         
     def backtrackSolve(self):
+
+        if self.isSolved():
+            return
         
         for row in range(9):
             for col in range(9):
@@ -104,9 +109,11 @@ class Sudoku:
                     for digit in range(1,10):
                         if self.isDigitValid(row, col, digit):
                             self.changeValue(row, col, digit)
-                            print("nowy bctrack")
-                            self.printBoard()
+                            #print("nowy bctrack")
+                            #self.printBoard()
                             self.backtrackSolve()
+                            if self.isSolved():
+                                return
                             self.changeValue(row, col, 0)
                     return
 

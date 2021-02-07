@@ -1,5 +1,8 @@
 # Sudoku
-Nothing really interesting. There is propably like tons of sudoku solvers on the internet. This one is basically just my own take on it. 
+My own take on sudoku solving.
+GUI made with Pygame.
+
+If you want to contribute you sure can. Check the CONTRIBUTE file.
 
 MILESTONES:               
 ASCII SUDOKU      - DONE     
